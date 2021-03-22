@@ -23,6 +23,7 @@ const get = async id => {
 
 const save = async user => {
   try {
+    console.log(user);
     return await User.create(user);
   } catch (err) {
     if (err.code === MONGO_ENTITY_EXISTS_ERROR_CODE) {

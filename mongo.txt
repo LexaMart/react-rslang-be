@@ -1,0 +1,1 @@
+mongodb+srv://LexaMart:qweqwe@cluster0.7injb.mongodb.net/learn-words?retryWrites=true&w=majority

@@ -1,6 +1,8 @@
 const { OK, NO_CONTENT } = require('http-status-codes');
 const router = require('express').Router();
+const upload = require('../../utils/image.middleware');
 
+const getStringPath = require('../../utils/getPath.middleware');
 const userService = require('./user.service');
 const { id, user } = require('../../utils/validation/schemas');
 const {
@@ -8,10 +10,16 @@ const {
   userIdValidator
 } = require('../../utils/validation/validator');
 
-router.post('/', validator(user, 'body'), async (req, res) => {
-  const userEntity = await userService.save(req.body);
-  res.status(OK).send(userEntity.toResponse());
-});
+router.post(
+  '/',
+  upload.single('avatar'),
+  getStringPath,
+  validator(user, 'body'),
+  async (req, res) => {
+    const userEntity = await userService.save(req.body);
+    res.status(OK).send(userEntity.toResponse());
+  }
+);
 
 router.get(
   '/:id',
