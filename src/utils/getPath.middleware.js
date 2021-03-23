@@ -5,7 +5,7 @@ const getStringPath = (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      avatar: req.file.path
+      avatar: req.file ? req.file.path : '/standart path'
     };
     return next();
   } catch (e) {
