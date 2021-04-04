@@ -5,8 +5,7 @@ const imgbbUploader = require('imgbb-uploader');
 const getStringPath = async (req, res, next) => {
   const imageApiKey = '948e7407a5c5c0867bc94c04d80b8d45';
   try {
-    let ress =
-      'https://www.vippng.com/png/detail/385-3856307_png-file-svg-user-icon.png';
+    let ress = null;
     const form = new FormData();
     if (req.file) {
       const image = Buffer.from(req.file.buffer).toString('base64');
@@ -23,7 +22,9 @@ const getStringPath = async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      avatar: req.file ? ress.thumb.url : ress
+      avatar: req.file
+        ? ress.thumb.url
+        : 'https://www.vippng.com/png/detail/385-3856307_png-file-svg-user-icon.png'
     };
     return next();
   } catch (e) {
